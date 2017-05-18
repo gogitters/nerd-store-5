@@ -1,6 +1,12 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    if params[:sort] && params[:sort_order]
+      @products = Product.order(params[:sort] => params[:sort_order])
+    elsif params[:discount]
+      @products = Product.where("price < ?", 10)
+    else
+      @products = Product.all
+    end
     render "index.html.erb"
   end
 
@@ -20,7 +26,11 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find_by(id: params[:id])
+    if params[:id] == "random"
+      @product = Product.all.sample
+    else
+      @product = Product.find_by(id: params[:id])
+    end
     render "show.html.erb"
   end
 
@@ -46,6 +56,11 @@ class ProductsController < ApplicationController
     @product.destroy
     flash[:warning] = "Product Destroyed"
     redirect_to "/"
+  end
+
+  def search 
+    @products = Product.where("name ILIKE ?", "%#{params[:search]}%")
+    render "index.html.erb"
   end
 end
 
