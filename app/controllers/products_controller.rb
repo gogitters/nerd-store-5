@@ -4,6 +4,8 @@ class ProductsController < ApplicationController
       @products = Product.order(params[:sort] => params[:sort_order])
     elsif params[:discount]
       @products = Product.where("price < ?", 10)
+    elsif params[:search]
+      @products = Product.where("name ILIKE ?", "%#{params[:search]}%")
     else
       @products = Product.all
     end
@@ -58,9 +60,5 @@ class ProductsController < ApplicationController
     redirect_to "/"
   end
 
-  def search 
-    @products = Product.where("name ILIKE ?", "%#{params[:search]}%")
-    render "index.html.erb"
-  end
 end
 
