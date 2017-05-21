@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @suppliers = Supplier.all
     render "new.html.erb"
   end
 
@@ -20,8 +21,8 @@ class ProductsController < ApplicationController
     @product = Product.create(
       name: params[:name],
       description: params[:description],
-      image: params[:image],
-      price: params[:price]
+      price: params[:price],
+      supplier_id: params[:supplier_id]
     )
     flash[:success] = "Product Created"
     redirect_to "/products/#{@product.id}"
@@ -46,8 +47,8 @@ class ProductsController < ApplicationController
     @product.update(
       name: params[:name],
       description: params[:description],
-      image: params[:image],
-      price: params[:price]
+      price: params[:price],
+      supplier_id: params[:supplier_id]
     )
     flash[:success] = "Product Updated"
     redirect_to "/products/#{@product.id}"

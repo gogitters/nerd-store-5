@@ -19,7 +19,7 @@
             <p>Description: <%= @product.description %></p>
             <%= link_to "Edit", "/products/#{@product.id}/edit", class: "btn btn-success" %>
             <%= link_to "Delete", "/products/#{@product.id}", {method: :delete, class: "btn btn-danger" }%>
-            <%= link_to "Add Image", "/images/new?product_id=#{@product.id}" %>
+            <%= link_to "Add Image", "/products/#{@product.id}/images/new" %>
         </div>
       </div>
     </div>

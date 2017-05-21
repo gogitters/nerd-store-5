@@ -1,5 +1,6 @@
 class ImagesController < ApplicationController
   def new
+    @product = Product.find_by(id: params[:product_id])
     render "new.html.erb"
   end
 
