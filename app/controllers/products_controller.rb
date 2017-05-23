@@ -1,5 +1,14 @@
 class ProductsController < ApplicationController
   def index
+    if session[:visit_count]
+      session[:visit_count] += 1
+    else
+      session[:visit_count] = 1
+    end
+    @visit_count = session[:visit_count]
+    if current_user
+      @message = "#{current_user.name} is really cool."
+    end
     if params[:sort] && params[:sort_order]
       @products = Product.order(params[:sort] => params[:sort_order])
     elsif params[:discount]

@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
   has_many :images
   belongs_to :supplier
+  has_many :orders
   
   def sale_message 
     if price <= 5

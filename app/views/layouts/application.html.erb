@@ -44,7 +44,12 @@
             <li><a href="/products/random">Random Product</a></li>
             <li><a href="#">Link</a></li>
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <% if current_user %>
+              <li><a href="/logout">Logout</a></li>
+            <% else %>
+              <li><a href="/signup">Sign Up</a></li>
+              <li><a href="/login">Login</a></li>
+            <% end %>
           </ul>
         </li>
       </ul>

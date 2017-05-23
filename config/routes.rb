@@ -11,4 +11,16 @@ Rails.application.routes.draw do
 
   get "/products/:product_id/images/new", to: 'images#new'
   post "/products/:product_id/images", to: 'images#create'
+
+  # sign up
+  get "/signup", to: 'users#new'
+  post "/users", to: 'users#create'
+
+  # login/logout
+  get "/login", to: 'sessions#new'
+  post "/login", to: 'sessions#create'
+  get "/logout", to: 'sessions#destroy'
+
+  # get "/orders/new", to: 'orders#new'
+  post "/orders", to: 'orders#create'
 end
