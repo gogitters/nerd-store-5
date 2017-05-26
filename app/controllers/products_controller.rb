@@ -1,4 +1,7 @@
 class ProductsController < ApplicationController
+  # before_action :authenticate_admin!, only: [:new, :edit, :create, :update, :destroy]
+  before_action :authenticate_admin!, except: [:index, :show]
+
   def index
     if session[:visit_count]
       session[:visit_count] += 1
@@ -22,19 +25,26 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @product = Product.new
     @suppliers = Supplier.all
     render "new.html.erb"
   end
 
   def create
-    @product = Product.create(
+    @product = Product.new(
       name: params[:name],
       description: params[:description],
       price: params[:price],
       supplier_id: params[:supplier_id]
     )
-    flash[:success] = "Product Created"
-    redirect_to "/products/#{@product.id}"
+    if @product.save
+      flash[:success] = "Product Created"
+      redirect_to "/products/#{@product.id}"
+    else
+      # flash[:warning] = "Product not created for the following reasons: #{@product.errors.full_messages.join(", ")}"
+      @suppliers = Supplier.all
+      render "new.html.erb"
+    end
   end
 
   def show
@@ -48,6 +58,7 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find_by(id: params[:id])
+    @suppliers = Supplier.all
     render "edit.html.erb"
   end
 

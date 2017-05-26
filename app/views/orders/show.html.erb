@@ -1,0 +1,7 @@
+<h1>Order Details:</h1>
+<h2>You ordered <%= pluralize(@order.quantity, @order.product.name) %></h2>
+<p>Order Number: <%= @order.id + 234324 %></p>
+<p>Quantity: <%= @order.quantity %></p>
+<p>Subtotal: <%= number_to_currency(@order.subtotal) %></p>
+<p>Tax: <%= number_to_currency(@order.tax) %></p>
+<p>Total: <%= number_to_currency(@order.total) %></p>

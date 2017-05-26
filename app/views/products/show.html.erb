@@ -17,13 +17,22 @@
               <li>Phone: <%= @product.supplier.phone %></li>
             </ul>
             <p>Description: <%= @product.description %></p>
-            <%= link_to "Edit", "/products/#{@product.id}/edit", class: "btn btn-success" %>
-            <%= link_to "Delete", "/products/#{@product.id}", {method: :delete, class: "btn btn-danger" }%>
-            <%= link_to "Add Image", "/products/#{@product.id}/images/new" %>
+            <% if current_user && current_user.admin %>
+              <%= link_to "Edit", "/products/#{@product.id}/edit", class: "btn btn-success" %>
+              <%= link_to "Delete", "/products/#{@product.id}", {method: :delete, class: "btn btn-danger" }%>
+              <%= link_to "Add Image", "/products/#{@product.id}/images/new" %>
+            <% end %>
+            <% if current_user %>
+              <%= form_tag "/orders", method: :post do %>
+                Quantity: <input type="text" name="quantity">
+                <input type="hidden" value="<%= @product.id %>" name="product_id">
+                <input type="submit" value="Order Now!">
+              <% end %>
+            <% end %>
         </div>
       </div>
     </div>
   </section>
 
-<img src="/assets/steampunk_wallpaper.jpg">
-<%= image_tag("steampunk_wallpaper.png") %>
+<!-- <img src="/assets/steampunk_wallpaper.jpg">
+<%# image_tag("steampunk_wallpaper.png") %> -->

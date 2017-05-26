@@ -2,6 +2,8 @@ class Product < ActiveRecord::Base
   has_many :images
   belongs_to :supplier
   has_many :orders
+
+  validates :name, :description, :price, presence: true
   
   def sale_message 
     if price <= 5

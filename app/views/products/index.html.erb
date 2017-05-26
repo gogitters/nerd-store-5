@@ -10,7 +10,7 @@
 
           <div class="col-sm-4">
             <div class="product_single">
-              <h2 class="product_header"><%= product.name %></h2>
+              <a href="/products/<%= product.id %>"><h2 class="product_header"><%= product.name %></h2></a>
               <p>Price: <%= product.price %></p>
               <p>Description: <%= product.description %></p>
               <p>Supplier: <%= product.supplier.name %></p>
