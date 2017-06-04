@@ -3,14 +3,7 @@
         <div class="col-sm-8 col-sm-offset-2">
           <div class="product_single">
             <h1><%= heading %></h1>
-            <% if @product && @product.errors.any? %>
-              <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved: </h2>
-              <ul>
-                <% @product.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-                <% end %>
-              </ul>
-            <% end %>
+            <%= render "errors" %>
             <%= form_tag url, method: form_method do %>
               <div>
                 Name: <input type="text" name="name" value="<%= @product.name %>">

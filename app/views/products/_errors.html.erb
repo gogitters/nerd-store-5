@@ -1,0 +1,8 @@
+<% if @product && @product.errors.any? %>
+  <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved: </h2>
+  <ul>
+    <% @product.errors.full_messages.each do |msg| %>
+      <li><h3><%= msg %></h3></li>
+    <% end %>
+  </ul>
+<% end %>

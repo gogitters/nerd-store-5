@@ -3,6 +3,9 @@ class Product < ActiveRecord::Base
   belongs_to :supplier
   has_many :orders
 
+  has_many :category_products
+  has_many :categories, through: :category_products
+
   validates :name, :description, :price, presence: true
   validates :name, uniqueness: true
   
