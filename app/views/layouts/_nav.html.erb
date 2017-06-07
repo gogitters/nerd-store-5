@@ -32,6 +32,8 @@
             <li><a href="/products?discount=true">Discount Items</a></li>
             <li><a href="/products/random">Random Product</a></li>
             <li class="divider"></li>
+            <li><a href="/carted_products">Your Cart (<%= @cart_count %>)</a></li>
+            <li class="divider"></li>
             <% all_categories.each do |category| %>
               <li><a href="/products?category=<%= category.name %>"><%= category.name %></a></li>
             <% end %>

@@ -29,7 +29,7 @@
               <%= link_to "Add Image", "/products/#{@product.id}/images/new" %>
             <% end %>
             <% if current_user %>
-              <%= form_tag "/orders", method: :post do %>
+              <%= form_tag "/carted_products", method: :post do %>
                 Quantity: <input type="text" name="quantity">
                 <input type="hidden" value="<%= @product.id %>" name="product_id">
                 <input type="submit" value="Order Now!">
